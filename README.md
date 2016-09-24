@@ -1,6 +1,6 @@
 # mobius-tubez
 
-First install [ffmpeg](https://ffmpeg.org)and [scipy](http://www.lfd.uci.edu/~gohlke/pythonlibs/#scipy)
+First install [ffmpeg](https://ffmpeg.org) and [scipy](http://www.lfd.uci.edu/~gohlke/pythonlibs/#scipy)
 
 for scipy use:
 ``` sh

@@ -1,0 +1,3 @@
+youtube-dl
+numpy
+sk-video

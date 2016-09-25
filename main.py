@@ -1,4 +1,12 @@
 import skvideo.io
 import skvideo.datasets
-videodata = skvideo.io.vread('test1.mp4')
-print(videodata.shape)
+import numpy as np
+
+videogen = skvideo.io.vreader('test2.mp4')
+
+print(videogen)
+
+writer = skvideo.io.FFmpegWriter("outputvideo.mp4", {'-vsync':1})
+for frame in videogen:
+        writer.writeFrame(frame)
+writer.close()

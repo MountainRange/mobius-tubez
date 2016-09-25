@@ -1,0 +1,3 @@
+[submodule "fbaas"]
+	path = fbaas
+	url = https://github.com/MountainRange/fbaas.git

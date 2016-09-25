@@ -2,6 +2,7 @@ import numpy as np
 import cv2
 import matplotlib.pyplot as plt
 import random
+import requests
 
 random.seed()
 
@@ -48,6 +49,17 @@ frameNum = 0
 fourcc = cv2.VideoWriter_fourcc(*'XVID')
 out = cv2.VideoWriter('output.avi',fourcc, 20.0, (cols,rows))
 
+r = requests.get('http://127.0.0.1:5000/api/v1/1000000')
+payload = eval(r.text)['payload']
+print(payload)
+
+fizzImgPre = cv2.imread('fizz.png',-1)
+fizzImg = cv2.resize(fizzImgPre,(cols, rows), interpolation = cv2.INTER_CUBIC)
+buzzImgPre = cv2.imread('buzz.png',-1)
+buzzImg = cv2.resize(buzzImgPre,(cols, rows), interpolation = cv2.INTER_CUBIC)
+fizzBuzzImgPre = cv2.imread('fizzbuzz.png',-1)
+fizzBuzzImg = cv2.resize(fizzBuzzImgPre,(cols, rows), interpolation = cv2.INTER_CUBIC)
+
 while(cap.isOpened()):
     #dst, frameNum, cur, trans, rot = followPath(frameNum, img, ranpath, cur, trans, rot)
     dst = img
@@ -66,7 +78,14 @@ while(cap.isOpened()):
     if cv2.waitKey(1) & 0xFF == ord('q'):
         break
 
-    out.write(dst)
+    if payload[frameNum%len(payload)] == 'Fizz':
+        out.write(fizzImg)
+    elif payload[frameNum%len(payload)] == 'Buzz':
+        out.write(buzzImg)
+    elif payload[frameNum%len(payload)] == 'FizzBuzz':
+        out.write(fizzBuzzImg)
+    else:
+        out.write(dst)
 
     frameNum += 1
     ret, img = cap.read()
